@@ -1,9 +1,7 @@
 /******************************************************************************
-
                             Online C Compiler.
                 Code, Compile, Run and Debug C program online.
 Write your code in this editor and press "Run" button to compile and execute it.
-
 *******************************************************************************/
 /**   Christmas lights controller.    
       @file lights_emh13.c   
@@ -11,8 +9,7 @@ Write your code in this editor and press "Run" button to compile and execute it.
       @email emh13@rice.edu 
       @date* 03/24/2021
       /
-      #include <stdio.h>
-      #include <stdlib.h>
+      
       /************************************************ *  constants (states) ***********************************************/
       #define     S_INIT      0   // initial
       #define     S_RED       1   // red lights on
@@ -21,6 +18,8 @@ Write your code in this editor and press "Run" button to compile and execute it.
       #define     S_OFF       4   // off
       #define     M_RGB       0   // red, green, blue enabled
       #define     M_RB        1   // red, blue enabled
+      #include <stdio.h>
+      #include <stdlib.h>
       /************************************************ *  global variables ***********************************************/
       int state;                  // tracks the current state
       int mode;                   // tracks the light mode
@@ -77,11 +76,13 @@ Write your code in this editor and press "Run" button to compile and execute it.
         int exit_flag = 0;
         
         // turn on the the lights
-        turn_on();
         while (exit_flag == 0)    
         {        
             // execute appropriate action for current state
-            if (state == S_OFF)
+            if (state == S_INIT){
+                turn_on();
+            }
+            else if (state == S_OFF)
             {            
                 // perform action for this state
                 turn_off();
@@ -184,5 +185,4 @@ Write your code in this editor and press "Run" button to compile and execute it.
           printf("OFF");
           return; 
       }
-
 

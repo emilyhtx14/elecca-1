@@ -10,10 +10,10 @@ Write your code in this editor and press "Run" button to compile and execute it.
 
     Reference: https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm
 
-    @file
-    @author
-    @email
-    @date
+    @matmul_emh13.c
+    @author Emily Huang
+    @email emh13@rice.edu
+    @date 03/30/2021
 */
 
 // standard libraries
@@ -53,14 +53,9 @@ void main(){
         }
     }
     
-    
-    // load input matrices into global arrays A and B
     load_data();
-    printf("this is matrix A: ");
-    print_matrix(A);
     
-    printf("this is matrix B: ");
-    print_matrix(B);
+    
     
     // matrix multiplication 
     for (int i = 0; i < A_ROWS; i++)
@@ -70,14 +65,11 @@ void main(){
             int sum = 0; 
             for(int k = 0; k < B_ROWS; k++)
             {
+                // dot product calculation
                 sum = sum + (A[i][k] * B[k][j]);
-                printf(" A[i][k]:  %d \n", A[i][k]);
-                printf(" B[k][j]:  %d \n", B[k][j]);
-                printf("The sum is %d \n", sum);
             }
             
             result[i][j] = sum;
-            print_matrix(result);
         }
     }
     print_matrix(result);

@@ -43,14 +43,24 @@ void print_matrix(int mat[A_ROWS][B_COLS]);
 /************************************************
  *  main
  ***********************************************/
-main(){
+void main(){
     
     // initialize empty array for the result with appropriate size
     int result [A_ROWS][B_COLS];
+    for (int i = 0; i < A_ROWS; i++ ){
+        for(int j = 0; j < B_COLS; j++ ){
+            result[i][j] = 0;
+        }
+    }
+    
     
     // load input matrices into global arrays A and B
-    A.load_data();
-    B.load_data();
+    load_data();
+    printf("this is matrix A: ");
+    print_matrix(A);
+    
+    printf("this is matrix B: ");
+    print_matrix(B);
     
     // matrix multiplication 
     for (int i = 0; i < A_ROWS; i++)
@@ -58,14 +68,19 @@ main(){
         for(int j = 0; j < B_COLS; j++)
         {
             int sum = 0; 
-            for(int k = 0; k < B_ROWS);
+            for(int k = 0; k < B_ROWS; k++)
             {
-                sum += A[i][k] * B[k][j];
+                sum = sum + (A[i][k] * B[k][j]);
+                printf(" A[i][k]:  %d \n", A[i][k]);
+                printf(" B[k][j]:  %d \n", B[k][j]);
+                printf("The sum is %d \n", sum);
             }
+            
             result[i][j] = sum;
+            print_matrix(result);
         }
     }
-    print_matrix(result)
+    print_matrix(result);
     return;
 }
 

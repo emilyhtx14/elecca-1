@@ -47,6 +47,8 @@ void main(){
     
     // initialize empty array for the result with appropriate size
     int result [A_ROWS][B_COLS];
+    
+    // initialize all array values to a value of 0
     for (int i = 0; i < A_ROWS; i++ ){
         for(int j = 0; j < B_COLS; j++ ){
             result[i][j] = 0;
@@ -54,8 +56,6 @@ void main(){
     }
     
     load_data();
-    
-    
     
     // matrix multiplication 
     for (int i = 0; i < A_ROWS; i++)

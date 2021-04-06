@@ -1,19 +1,12 @@
-/******************************************************************************
-
-                            Online C Compiler.
-                Code, Compile, Run and Debug C program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
 /**
     Matrix multiplier.
 
     Reference: https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm
 
-    @matmul_emh13.c
+    @file matmul_soln.c
     @author Emily Huang
     @email emh13@rice.edu
-    @date 03/30/2021
+    @date 03/21/2021
 */
 
 // standard libraries
@@ -43,37 +36,52 @@ void print_matrix(int mat[A_ROWS][B_COLS]);
 /************************************************
  *  main
  ***********************************************/
-void main(){
-    
-    // initialize empty array for the result with appropriate size
-    int result [A_ROWS][B_COLS];
-    
-    // initialize all array values to a value of 0
-    for (int i = 0; i < A_ROWS; i++ ){
-        for(int j = 0; j < B_COLS; j++ ){
-            result[i][j] = 0;
-        }
-    }
-    
-    load_data();
-    
-    // matrix multiplication 
-    for (int i = 0; i < A_ROWS; i++)
+ 
+// points to the base address of a 2D array
+// the pointers are of a 1D array type, pointing to the 
+// a 1D array with the # of elements = # of columns in 2D array
+
+// int (*ptr_a)[A_COLS]; 
+int *ptr_a = &A[0][0]; 
+int *ptr_b = &B[0][0]; 
+// int (*ptr_b)[B_COLS];
+
+// initializes final result array
+int res [A_ROWS][B_COLS];
+int *ptr_res = &res[0][0]; 
+
+
+int main(void)
+{
+    load_data();                // load input matrices from files
+
+    int i, j, k;
+    int sum;
+
+    for (i = 0; i < A_ROWS; i++)
     {
-        for(int j = 0; j < B_COLS; j++)
+        for (j = 0; j < B_COLS; j++)
         {
-            int sum = 0; 
-            for(int k = 0; k < B_ROWS; k++)
+            // each elem of res is the dot product of row i of A
+            // with column j of B
+            sum = 0;
+            int a_value;
+            int b_value;
+            for (k = 0; k < A_COLS; k++)
             {
-                // dot product calculation
-                sum = sum + (A[i][k] * B[k][j]);
+                // add initial pointer value
+                // cols*i adds row indices
+                // k and/or j adds the column indices
+                a_value =  *(ptr_a + A_COLS*i + k);
+                b_value = *(ptr_b + B_COLS*k + j);
+                sum += a_value * b_value;
             }
-            
-            result[i][j] = sum;
+
+            res[i][j] = sum;
         }
     }
-    print_matrix(result);
-    return;
+    print_matrix(res);
+    return 0;
 }
 
 

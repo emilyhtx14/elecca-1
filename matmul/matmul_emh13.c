@@ -41,10 +41,8 @@ void print_matrix(int mat[A_ROWS][B_COLS]);
 // the pointers are of a 1D array type, pointing to the 
 // a 1D array with the # of elements = # of columns in 2D array
 
-// int (*ptr_a)[A_COLS]; 
 int *ptr_a = &A[0][0]; 
 int *ptr_b = &B[0][0]; 
-// int (*ptr_b)[B_COLS];
 
 // initializes final result array
 int res [A_ROWS][B_COLS];

@@ -3,10 +3,10 @@
 
     Reference: https://en.wikipedia.org/wiki/Matrix_multiplication_algorithm
 
-    @file matmul_soln.c
-    @author Jennifer Hellar
-    @email jennifer.hellar@rice.edu
-    @date 03/21/2021
+    @file matmul_pointers_emh13.c
+    @author Emily Huang
+    @email emh13@rice.edu
+    @date 04/06/2021
 */
 
 // standard libraries
@@ -41,20 +41,21 @@ void print_matrix(int mat[A_ROWS][B_COLS]);
 // the pointers are of a 1D array type, pointing to the 
 // a 1D array with the # of elements = # of columns in 2D array
 
-// int (*ptr_a)[A_COLS]; 
+
+
+
+
+// initializes final result array
+int res [A_ROWS][B_COLS];
+
+// declares and initializes pointer
+int *ptr_res = &res[0][0]; 
 int *ptr_a = &A[0][0]; 
 int *ptr_b = &B[0][0]; 
-// int (*ptr_b)[B_COLS];
-
-// instantiates final result array
-int res [A_ROWS][B_COLS];
-int *ptr_res = &res[0][0]; 
 
 
 int main(void)
 {
-       // initialize empty result matrix
-
     load_data();                // load input matrices from files
 
     int i, j, k;
@@ -71,16 +72,6 @@ int main(void)
             int b_value;
             for (k = 0; k < A_COLS; k++)
             {
-                // sum += A[i][k]*B[k][j];
-                // (ptr_a + i) points to the ith row
-                // *(ptr_a + i) dereferences 
-                // +k 
-                //printf(*(ptr_a + i));
-                
-                
-                // a_value = *(*(ptr_a + i) + k);
-                // b_value = *(*(ptr_b + k) + j);
-                
                 // add initial pointer value
                 // cols*i adds row indices
                 // k and/or j adds the column indices
@@ -88,8 +79,10 @@ int main(void)
                 b_value = *(ptr_b + B_COLS*k + j);
                 sum += a_value * b_value;
             }
-
-            res[i][j] = sum;
+            
+            // assign value to final result matrix
+            *(ptr_res + i*B_COLS + j) = sum;
+            
         }
     }
     print_matrix(res);

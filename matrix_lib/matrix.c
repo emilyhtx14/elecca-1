@@ -192,13 +192,18 @@ void matrix_norm(float res[ROWS][COLS], float a[ROWS][COLS])
 void matrix_inverse(float res[ROWS][COLS], float a[ROWS][COLS])
 {
     // compute determinant of 2x2 matrix
-    float determinant = (a[0][0] * a[1][1]) - (a[0][1] - a[1][0]);
+    float a_1 = a[0][0];
+    float a_2 = a[1][1];
+    float a_3 = a[0][1];
+    float a_4 = a[1][0];
     
+    float determinant = (a[0][0] * a[1][1]) - (a[0][1] * a[1][0]);
+
     // switch terms in matrix
-    res[0][0] = a[1][1];
-    res[0][1] = -a[1][0];
-    res[1][0] = -a[0][1];
-    res[1][1] = a[0][0];
+    res[0][0] = a_2;
+    res[0][1] = -a_4;
+    res[1][0] = -a_3;
+    res[1][1] = a_1;
     
     // multiple by inverse of determinant
     matrix_scale(res, res, 1/determinant);
